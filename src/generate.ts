@@ -36,7 +36,8 @@ export function generate(
   let schema: any;
 
   try {
-    const content = fs.readFileSync(src);
+    const srcResolve = src.startsWith("..") ? path.resolve(__dirname,src) : src;
+    const content = fs.readFileSync(srcResolve);
     schema = JSON.parse(content.toString());
   } catch (e) {
     if (e instanceof SyntaxError) {

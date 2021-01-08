@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import {isValidPropertyName} from 'tsutils';
+// import {isValidPropertyName} from 'tsutils';
 
 import * as conf from './conf';
 import {NativeNames, Schema} from './types';
@@ -169,8 +169,12 @@ export function translateType(type: string | undefined): DefType {
     return {type: conf.nativeTypes[typeType], native: true};
   }
 
+  if (type) {
   const subtype = type.match(/^#\/definitions\/(.*)/);
   if (subtype) return resolveDefType(subtype[1]);
+  } else {
+    type = "UNKOWN"
+  }
 
   return {type, native: true};
 }
@@ -195,10 +199,10 @@ function resolveDefType(type: string): DefType {
 export function getAccessor(key: string, propName = '') {
   let res = key;
 
-  if (isValidPropertyName(key)) {
+  // if (isValidPropertyName(key)) {
     if (propName) return `${propName}.${res}`;
     return res;
-  }
+  // }
 
   res = `'${res}'`;
   if (propName) return `${propName}[${res}]`;

@@ -23,6 +23,7 @@ function doesDirExist(path: string) {
  * @param path
  */
 export function createDir(path: string) {
+  // if (!doesDirExist(path)) fs.mkdirSync(path, {recursive: true});
   if (!doesDirExist(path)) fs.mkdirSync(path);
 }
 

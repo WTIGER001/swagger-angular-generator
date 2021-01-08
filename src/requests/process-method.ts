@@ -33,7 +33,7 @@ export function processMethod(method: ControllerMethod, unwrapSingleParamMethods
   const simpleName = method.simpleName;
   const methodName = method.methodName;
 
-  if (method.paramDef) {
+  if (method.paramDef && allowed) {
     const paramDef = method.paramDef.filter(df => allowed.includes(df.in));
     paramGroups = groupBy(paramDef, 'in');
     const paramsType = upperFirst(`${method.simpleName}Params`);
